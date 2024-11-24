@@ -26,11 +26,31 @@ const createOrderInDB = async (order: TOrder) => {
     await product.save();
 
     return newOrder;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message || "Error creating the order");
   }
 };
 
+const calculateRevenue = async () => {
+    try {
+      const result = await Order.aggregate([
+        {
+          $group: {
+            _id: null,
+            totalRevenue: { $sum: '$totalPrice' },
+          },
+        },
+      ]);
+  
+      // Return totalRevenue or default to 0 if no orders are found
+      return result.length > 0 ? result[0].totalRevenue : 0;
+    } catch (error: any) {
+      throw new Error(error.message || "Failed to calculate revenue");
+    }
+  };
+
 export const OrderService = {
   createOrderInDB,
+  calculateRevenue
 };
