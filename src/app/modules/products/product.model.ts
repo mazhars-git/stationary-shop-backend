@@ -17,7 +17,27 @@ const productSchema = new Schema<TProduct>({
   isDeleted: { type: Boolean, default: false },
 },
 {
-  toJSON: { virtuals: true }
+  timestamps: true, 
+},
+);
+
+// Query middleware
+productSchema.pre("find", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+
+  next();
+});
+
+productSchema.pre("findOne", function (next) {
+  this.findOne({ isDeleted: { $ne: true } });
+
+  next();
+});
+
+// Query middleware/hook for preventing to get deleted data: aggregate
+productSchema.pre("aggregate", function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
 });
 
 // Create and export the Mongoose model
