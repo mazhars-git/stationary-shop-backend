@@ -14,7 +14,7 @@ router.get("/api/products/:productId", ProductController.getSingleProduct);
 // Update Product Information
 router.put("/api/products/:productId", ProductController.updateSingleProduct);
 
-// // Delete a Product from DB
-// router.delete("/api/products/:productId", ProductController.deleteProduct);
+// Delete a Product from DB
+router.delete("/api/products/:productId", ProductController.deleteProduct)
 
 export const ProductRoutes = router;
