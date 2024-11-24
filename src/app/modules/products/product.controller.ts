@@ -53,7 +53,7 @@ const getAllProducts = async (req: Request, res: Response) => {
   
         return res.status(200).json({
           success: true,
-          message: `Products matching '${searchTerm}' fetched successfully!`,
+          message: `Products matching '${searchTerm}' retrieved successfully!`,
           data: products,
         });
       } else {
@@ -62,10 +62,11 @@ const getAllProducts = async (req: Request, res: Response) => {
   
         return res.status(200).json({
           success: true,
-          message: "All products fetched successfully!",
+          message: "Products retrieved successfully",
           data: allProducts,
         });
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       // Catch and handle any errors
       return res.status(500).json({
@@ -84,7 +85,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const result = await ProductServices.retrieveSingleProductFromDB(productId);
     res.status(200).json({
       success: true,
-      message: 'Product fetched successfully!',
+      message: 'Product retrieved successfully',
       data: result,
     });
   } catch (err) {
