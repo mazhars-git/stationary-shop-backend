@@ -15,6 +15,9 @@ const productSchema = new Schema<TProduct>({
   quantity: { type: Number, required: true },
   inStock: { type: Boolean, required: true },
   isDeleted: { type: Boolean, default: false },
+},
+{
+  toJSON: { virtuals: true }
 });
 
 // Create and export the Mongoose model
