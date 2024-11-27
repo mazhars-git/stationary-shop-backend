@@ -1,43 +1,43 @@
-#Stationery Products API
+# Stationery Products API
 
-#####This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
+##### This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
 
-##Features
+## Features
 1. Product Management
 
-    *Create, update, delete, and fetch products.
-    *Inventory tracking for products, including stock availability.
+    * Create, update, delete, and fetch products.
+    * Inventory tracking for products, including stock availability.
 
 2. Order Management
 
-    *Place orders and update product inventory accordingly.
-    *Calculate total revenue from all orders using MongoDB aggregation.
+    * Place orders and update product inventory accordingly.
+    * Calculate total revenue from all orders using MongoDB aggregation.
 
 3. Dynamic Filtering
 
-    *Search for products by name, brand, or category.
+    * Search for products by name, brand, or category.
 
 4. Validation
 
-    *Uses zod for request validation to ensure data consistency.
+    * Uses zod for request validation to ensure data consistency.
 
 
-##Technologies Used
+## Technologies Used
 
-    *Node.js: JavaScript runtime for building the backend.
-    *Express.js: Web framework for creating REST APIs.
-    *MongoDB: NoSQL database for data storage.
-    *Mongoose: ODM for MongoDB schema and queries.
-    *TypeScript: Typed superset of JavaScript for better development experience.
-    *Zod: Schema-based validation library for request data validation.
+    * Node.js: JavaScript runtime for building the backend.
+    * Express.js: Web framework for creating REST APIs.
+    * MongoDB: NoSQL database for data storage.
+    * Mongoose: ODM for MongoDB schema and queries.
+    * TypeScript: Typed superset of JavaScript for better development experience.
+    * Zod: Schema-based validation library for request data validation.
 
 
-##Installation
+## Installation
 
 1. Clone the repository:
 
 bash
-```git clone https://github.com/Mahmudul107/stationary-shop```
+``` git clone https://github.com/Mahmudul107/stationary-shop ```
 ```cd stationery-api```
 
 2. Install dependencies:
@@ -59,13 +59,13 @@ bash
 5. Access the API at http://localhost:5000.
 
 
-##Endpoints
+## Endpoints
 
-###Product Management
+### Product Management
 Create a Product
-    *Endpoint: /api/products
-    *Method: POST
-    *Request Body:
+    * Endpoint: /api/products
+    * Method: POST
+    * Request Body:
 
 {
   "name": "Pen",
@@ -77,7 +77,7 @@ Create a Product
   "inStock": true
 }
 
-*Response:
+* Response:
 
 {
   "success": true,
@@ -85,19 +85,19 @@ Create a Product
   "data": { ...product details... }
 }
 
-###Get All Products
+### Get All Products
 
-    *Endpoint: /api/products
-    *Method: GET
-    *Query Parameters:
+    * Endpoint: /api/products
+    * Method: GET
+    * Query Parameters:
         *searchTerm (optional): Filter products by name, brand, or category.
-    *Response
+    * Response
 {
   "name": "Updated Pen",
   "quantity": 50
 }
 
-*Response:
+* Response:
 
 {
   "success": true,
@@ -105,18 +105,18 @@ Create a Product
   "data": { ...updated product details... }
 }
 
-###Order Management
+### Order Management
 Place an Order
-    *Endpoint: /api/orders
-    *Method: POST
-    *Request Body:
+    * Endpoint: /api/orders
+    * Method: POST
+    * Request Body:
 {
   "email": "customer@example.com",
   "product": "product_id_here",
   "quantity": 2
 }
 
-*Response:
+* Response:
 
 {
   "success": true,
@@ -124,10 +124,10 @@ Place an Order
   "data": { ...order details... }
 }
 
-###Calculate Revenue
-    *Endpoint: /api/orders/revenue
-    *Method: GET
-    *Response:
+### Calculate Revenue
+    * Endpoint: /api/orders/revenue
+    * Method: GET
+    * Response:
 
 {
   "message": "Revenue calculated successfully",
@@ -137,7 +137,7 @@ Place an Order
     }
 }
 
-##Project Structure
+## Project Structure
 stationery-api/
 
 ├── src/
@@ -159,18 +159,18 @@ stationery-api/
 ├── tsconfig.json
 ├── .env
 
-##Scripts
-    *npm run dev: Start the development server with hot-reloading.
-    *npm run build: Compile TypeScript into JavaScript.
-    *npm start: Start the production server.
+## Scripts
+    * npm run dev: Start the development server with hot-reloading.
+    * npm run build: Compile TypeScript into JavaScript.
+    * npm start: Start the production server.
 
-##Future Improvements
-    *Add user authentication and authorization.
-    *Implement pagination for product and order listings.
-    *Improve error handling and logging.
-    *Add unit and integration tests.
+## Future Improvements
+    * Add user authentication and authorization.
+    * Implement pagination for product and order listings.
+    * Improve error handling and logging.
+    * Add unit and integration tests.
 
-##Contributors
+## Contributors
 
-    *Your Name – Developer
-####Feel free to open an issue or create a pull request for suggestions or improvements!
+    * Your Name – Mahmudul Islam
+#### Feel free to open an issue or create a pull request for suggestions or improvements!
