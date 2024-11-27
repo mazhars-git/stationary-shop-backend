@@ -26,7 +26,8 @@ const createNewProduct = async (req: Request, res: Response) => {
 };
 
 // Retrieve All Products
-const getAllProducts = async (req: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getAllProducts = async (req: Request, res: Response):Promise<any> => {
     const { searchTerm } = req.query;
   
     try {
@@ -94,7 +95,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 };
 
 
-const updateSingleProduct = async (req: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const updateSingleProduct = async (req: Request, res: Response):Promise<any> => {
     const { productId } = req.params; 
     const productData = req.body;
   
@@ -115,6 +117,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
         message: "Product updated successfully",
         data: updatedProduct,
       });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return res.status(500).json({
         success: false,
@@ -125,7 +128,8 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   };
 
 
-  const deleteProduct = async (req: Request, res: Response) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const deleteProduct = async (req: Request, res: Response):Promise<any> => {
     try {
       const product = await Product.findByIdAndDelete(req.params.productId);
   

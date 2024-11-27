@@ -45,6 +45,7 @@ const calculateRevenue = async () => {
   
       // Return totalRevenue or default to 0 if no orders are found
       return result.length > 0 ? result[0].totalRevenue : 0;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       throw new Error(error.message || "Failed to calculate revenue");
     }
