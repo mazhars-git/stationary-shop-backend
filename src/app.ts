@@ -11,6 +11,7 @@ app.use(cors());
 
 app.use("/", ProductRoutes);
 app.use("/", OrderRoutes);
+app.use("/", OrderRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Stationary Shop is running on..');

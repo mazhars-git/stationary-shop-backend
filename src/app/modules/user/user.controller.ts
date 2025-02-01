@@ -3,10 +3,16 @@ import sendResponse from '../../utils/sendResponse';
 import { userService } from './user.service';
 import httpStatus from 'http-status';
 
+// Create a new user controller
 const createUser = catchAsync(async (req, res) => {
   const payload = req.body;
 
   const result = await userService.createUser(payload);
+//   res.status(201).json({
+//     success: true,
+//     message: "User created successfully",
+//     data: result,
+//   });
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -16,6 +22,7 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+// Get all users controller
 const getUser = catchAsync(async (req, res) => {
   const result = await userService.getAllUser();
 
@@ -27,6 +34,7 @@ const getUser = catchAsync(async (req, res) => {
   });
 });
 
+// Get single user controller
 const getSingleUser = catchAsync(async (req, res) => {
 //   console.log(req.params);
   const userId = req.params.userId;
@@ -41,6 +49,7 @@ const getSingleUser = catchAsync(async (req, res) => {
   });
 });
 
+// Update user controller
 const updateUser = catchAsync(async (req, res) => {
   const userId = req.params.userId;
   const body = req.body;
@@ -54,6 +63,7 @@ const updateUser = catchAsync(async (req, res) => {
   });
 });
 
+// Delete user controller
 const deleteUser = catchAsync(async (req, res) => {
   const userId = req.params.userId;
   await userService.deleteUser(userId);
