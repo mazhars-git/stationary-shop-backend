@@ -23,7 +23,7 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 // Get all users controller
-const getUser = catchAsync(async (req, res) => {
+const getAllUser = catchAsync(async (req, res) => {
   const result = await userService.getAllUser();
 
   sendResponse(res, {
@@ -78,7 +78,7 @@ const deleteUser = catchAsync(async (req, res) => {
 
 export const userController = {
   createUser,
-  getUser,
+  getAllUser,
   getSingleUser,
   updateUser,
   deleteUser,

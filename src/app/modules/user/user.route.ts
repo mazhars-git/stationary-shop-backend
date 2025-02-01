@@ -13,7 +13,13 @@ userRouter.post(
   userController.createUser,
 );
 
-userRouter.get('/:userId', userController.getSingleUser)
-userRouter.put('/:userId', userController.updateUser)
-userRouter.delete('/:userId', userController.deleteUser)
-userRouter.get('/',auth(USER_ROLE.admin, USER_ROLE.user), userController.getUser)
+userRouter.get('/:userId', userController.getSingleUser);
+userRouter.put('/:userId', userController.updateUser);
+userRouter.delete('/:userId', userController.deleteUser);
+userRouter.get(
+  '/',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  userController.getAllUser,
+);
+
+export const UserRoutes = userRouter;
