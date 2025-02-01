@@ -1,6 +1,10 @@
 # Stationery Products API
 
+<<<<<<< HEAD
 #### This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
+=======
+##### This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
+>>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
 
 ## Features
 1. Product Management
@@ -15,11 +19,15 @@
 
 3. Dynamic Filtering
 
-    *Search for products by name, brand, or category.
+    * Search for products by name, brand, or category.
 
 4. Validation
 
+<<<<<<< HEAD
     *  Uses zod for request validation to ensure data consistency.
+=======
+    * Uses zod for request validation to ensure data consistency.
+>>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
 
 
 ## Technologies Used
@@ -37,7 +45,7 @@
 1. Clone the repository:
 
 bash
-```git clone https://github.com/Mahmudul107/stationary-shop```
+``` git clone https://github.com/Mahmudul107/stationary-shop ```
 ```cd stationery-api```
 
 2. Install dependencies:
@@ -90,14 +98,18 @@ Create a Product
     * Endpoint: /api/products
     * Method: GET
     * Query Parameters:
+<<<<<<< HEAD
          * searchTerm (optional): Filter products by name, brand, or category.
+=======
+        *searchTerm (optional): Filter products by name, brand, or category.
+>>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
     * Response
 {
   "name": "Updated Pen",
   "quantity": 50
 }
 
-*Response:
+* Response:
 
 {
   "success": true,
@@ -162,7 +174,11 @@ stationery-api/
 ## Scripts
     * npm run dev: Start the development server with hot-reloading.
     * npm run build: Compile TypeScript into JavaScript.
+<<<<<<< HEAD
     * npm start: Start the production server. 
+=======
+    * npm start: Start the production server.
+>>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
 
 ## Future Improvements
     * Add user authentication and authorization.
@@ -170,7 +186,12 @@ stationery-api/
     * Improve error handling and logging.
     * Add unit and integration tests.
 
-##Contributors
+## Contributors
 
+<<<<<<< HEAD
     * Mahmudul Islam
 #### Feel free to open an issue or create a pull request for suggestions or improvements!
+=======
+    * Your Name – Mahmudul Islam
+#### Feel free to open an issue or create a pull request for suggestions or improvements!
+>>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
