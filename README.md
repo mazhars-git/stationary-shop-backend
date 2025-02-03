@@ -1,197 +1,80 @@
-# Stationery Products API
+# Stationary Shop Backend
 
-<<<<<<< HEAD
-#### This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
-=======
-##### This is a Node.js and Express-based REST API for managing stationery products and orders. The API supports CRUD operations for products, inventory management, and order processing, including revenue calculation.
->>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
+## Live Link
+
+- [Stationary Shop Backend](https://stationary-backend-teal.vercel.app/)
+
+## Overview
+
+Stationary Shop is a comprehensive backend system designed for an online stationery shop. It allows users to browse products, place orders, and manage their profile. The admin has the ability to manage products, users, and orders.
 
 ## Features
-1. Product Management
 
-    * Create, update, delete, and fetch products.
-    * Inventory tracking for products, including stock availability.
-
-2. Order Management
-
-    * Place orders and update product inventory accordingly.
-    * Calculate total revenue from all orders using MongoDB aggregation.
-
-3. Dynamic Filtering
-
-    * Search for products by name, brand, or category.
-
-4. Validation
-
-<<<<<<< HEAD
-    *  Uses zod for request validation to ensure data consistency.
-=======
-    * Uses zod for request validation to ensure data consistency.
->>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
-
+- **User Authentication:** User registration and login with JWT token-based authentication.
+- **Product Management:** CRUD operations for adding, updating, and deleting stationery products.
+- **Order Management:** Users can place orders, and the admin can manage order statuses.
+- **Payment Integration:** Supports verifying payments through Surjopay API.
+- **Roles:** Admin and User roles with access control for various endpoints.
+- **Product Search and Filters:** Provides advanced search options with filters and pagination.
+- **Stock Management:** Real-time stock updates upon order placement.
 
 ## Technologies Used
 
-    * Node.js: JavaScript runtime for building the backend.
-    * Express.js: Web framework for creating REST APIs.
-    * MongoDB: NoSQL database for data storage.
-    * Mongoose: ODM for MongoDB schema and queries.
-    * TypeScript: Typed superset of JavaScript for better development experience.
-    * Zod: Schema-based validation library for request data validation.
-
-
-## Installation
-
-1. Clone the repository:
-
-bash
-``` git clone https://github.com/Mahmudul107/stationary-shop ```
-```cd stationery-api```
-
-2. Install dependencies:
-
-bash
-```npm install```
-
-3. Create a .env file in the root directory and add the following environment variables:
-
-env
-```PORT=5000```
-```MONGO_URI=mongodb://localhost:27017/stationery```
-
-4. Start the development server:
-
-bash
-```npm run dev```
-
-5. Access the API at http://localhost:5000.
-
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB, Mongoose
+- **Authentication:** JWT (JSON Web Token)
+- **Payment Gateway:** Surjopay
+- **Validation:** Zod
+- **Error Handling:** Custom AppError Class
+- **Request Handling:** Middleware, Async Error Handling
 
 ## Endpoints
 
-### Product Management
-Create a Product
-    * Endpoint: /api/products
-    * Method: POST
-    * Request Body:
+- **POST `/api/users/register`** - User registration.
+- **POST `/api/users/login`** - User login (returns a JWT token).
+- **GET `/api/products`** - Get all products.
+- **GET `/api/products/:id`** - Get a specific product by ID.
+- **POST `/api/orders`** - Place an order.
+- **POST `/api/payment/verify`** - Verify payment with Surjopay.
+- **GET `/api/orders`** - Get all orders (admin only).
+- **GET `/api/users`** - Get all users (admin only).
 
-{
-  "name": "Pen",
-  "brand": "Pilot",
-  "price": 2.5,
-  "category": "Writing",
-  "description": "A smooth writing pen",
-  "quantity": 100,
-  "inStock": true
-}
+## Setup
 
-* Response:
+### Prerequisites
 
-{
-  "success": true,
-  "message": "Product created successfully",
-  "data": { ...product details... }
-}
+- Node.js >= 16.0
+- MongoDB (local or cloud)
+- A Surjopay account for payment integration
 
-### Get All Products
+### Installation
 
-    * Endpoint: /api/products
-    * Method: GET
-    * Query Parameters:
-<<<<<<< HEAD
-         * searchTerm (optional): Filter products by name, brand, or category.
-=======
-        *searchTerm (optional): Filter products by name, brand, or category.
->>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
-    * Response
-{
-  "name": "Updated Pen",
-  "quantity": 50
-}
+1. Clone the repository:
 
-* Response:
+   ```bash
+   git clone https://github.com/Mahmudul107/stationary-shop.git
 
-{
-  "success": true,
-  "message": "Product updated successfully",
-  "data": { ...updated product details... }
-}
+   ```
 
-### Order Management
-Place an Order
-    * Endpoint: /api/orders
-    * Method: POST
-    * Request Body:
-{
-  "email": "customer@example.com",
-  "product": "product_id_here",
-  "quantity": 2
-}
+2. Navigate into the project directory:
+   `cd stationary-shop`
 
-* Response:
+3. Install dependencies:
+   npm install
 
-{
-  "success": true,
-  "message": "Order placed successfully",
-  "data": { ...order details... }
-}
+4. Create a .env file in the root directory and add the following environment variables:
+   NODE_ENV=
+   PORT=
+   DATABASE_URL=
+   BYCRYPT_SALT_Round=
+   JWT_ACCESS_SECRET=
+   JWT_ACCESS_EXPIRES_IN=
 
-### Calculate Revenue
-    * Endpoint: /api/orders/revenue
-    * Method: GET
-    * Response:
+5. Run the app:
+    ```npm run dev```
 
-{
-  "message": "Revenue calculated successfully",
-  "status": true,
-  "data": {
-    "totalRevenue": 720
-    }
-}
+### API Documentation
+For detailed API usage, refer to the API documentation section or review the Postman collections (if available).
 
-## Project Structure
-stationery-api/
-
-├── src/
-│   ├── products/
-│   │   ├── product.interface.ts   # Product TypeScript interface
-│   │   ├── product.model.ts       # Product schema and model
-│   │   ├── product.controller.ts  # Product controllers
-│   │   ├── product.routes.ts      # Product routes
-│   │   ├── product.validation.ts  # Product validation schema
-│   ├── orders/
-│   │   ├── order.interface.ts     # Order TypeScript interface
-│   │   ├── order.model.ts         # Order schema and model
-│   │   ├── order.controller.ts    # Order controllers
-│   │   ├── order.routes.ts        # Order routes
-│   │   ├── order.validation.ts    # Order validation schema
-│   ├── app.ts                     # Express app initialization
-│   ├── server.ts                  # Server entry point
-├── package.json
-├── tsconfig.json
-├── .env
-
-## Scripts
-    * npm run dev: Start the development server with hot-reloading.
-    * npm run build: Compile TypeScript into JavaScript.
-<<<<<<< HEAD
-    * npm start: Start the production server. 
-=======
-    * npm start: Start the production server.
->>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
-
-## Future Improvements
-    * Add user authentication and authorization.
-    * Implement pagination for product and order listings.
-    * Improve error handling and logging.
-    * Add unit and integration tests.
-
-## Contributors
-
-<<<<<<< HEAD
-    * Mahmudul Islam
-#### Feel free to open an issue or create a pull request for suggestions or improvements!
-=======
-    * Your Name – Mahmudul Islam
-#### Feel free to open an issue or create a pull request for suggestions or improvements!
->>>>>>> 9cf1282e0d1254e55cab20652aa6f3fac98e9eee
+## Contact
+[Github](https://github.com/Mahmudul107)
