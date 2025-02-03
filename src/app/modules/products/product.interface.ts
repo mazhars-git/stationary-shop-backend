@@ -45,20 +45,19 @@ export type TStationeryModels =
   | "AL-Star"
   | "2000";
 
-export type TProductCategory =
-  | "Writing"
-  | "Office Supplies"
-  | "Art Supplies"
-  | "Educational"
-  | "Technology";
+// export type TProductCategory = "Writing"
+//   | "Office Supplies"
+//   | "Art Supplies"
+//   | "Educational"
+//   | "Technology";
 
 // Define the product type
 export type TProduct = {
   name: string;
   brand: TStationeryBrands;
-  model: TStationeryModels;
+  model: TProductModel;
   price: number;
-  category: TProductCategory;
+  category: string;
   description: string;
   quantity: number;
   inStock: boolean;

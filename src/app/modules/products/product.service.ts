@@ -1,15 +1,24 @@
+import QueryBuilder from '../../builder/QueryBuilder';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
 const createNewProductIntoDB = async (product: TProduct) => {
   const result = await Product.create(product);
+  // console.log(result);
   return result;
 };
 
 // Retrieve All Products
-const retrieveAllProductsFromDB = async () => {
-  const result = await Product.find();
-  return result;
+const getAllProductService = async (searchTerm: Record<string, unknown>) => {
+  const allProductQuery = new QueryBuilder(Product.find(), searchTerm)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+  const result = await allProductQuery.modelQuery;
+  const meta = await allProductQuery.countTotal();
+
+  return { result, meta };
 };
 
 // Retrieve a specific Product
@@ -34,7 +43,7 @@ const deleteProductFromDB = async (id: string) => {
 
 export const ProductServices = {
   createNewProductIntoDB,
-  retrieveAllProductsFromDB,
+  getAllProductService,
   retrieveSingleProductFromDB,
   updateSingleProductFromDB,
   deleteProductFromDB,
