@@ -1,25 +1,33 @@
 import { Schema, model } from "mongoose";
-import { TProduct } from "./product.interface";
+import { TProduct, TProductModel } from "./product.interface";
+
+// Define product categories as an array of string literals
+const productCategories = [
+  "Writing",
+  "Office Supplies",
+  "Art Supplies",
+  "Educational",
+  "Technology",
+] as const;
 
 // Schema for TProduct
-const productSchema = new Schema<TProduct>({
-  name: { type: String, required: true },
-  brand: { type: String, required: true },
-  price: { type: Number, required: true },
-  category: { 
-    type: String, 
-    enum: ["Writing", "Office Supplies", "Art Supplies", "Educational", "Technology"], 
-    required: true 
+const productSchema = new Schema<TProduct>(
+  {
+    name: { type: String, required: true },
+    brand: { type: String, required: true },
+    model: { type: String, required: true },
+    price: { type: Number, required: true },
+    category: { type: String, enum: productCategories, required: true },
+    description: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    inStock: { type: Boolean, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
-  description: { type: String, required: true },
-  quantity: { type: Number, required: true },
-  inStock: { type: Boolean, required: true },
-  isDeleted: { type: Boolean, default: false },
-},
-{
-  timestamps: true, 
-},
+  {
+    timestamps: true,
+  }
 );
+
 
 // Query middleware
 productSchema.pre("find", function (next) {
@@ -41,4 +49,4 @@ productSchema.pre("aggregate", function (next) {
 });
 
 // Create and export the Mongoose model
-export const Product = model<TProduct>("Product", productSchema);
+export const Product = model<TProduct, TProductModel>("Product", productSchema);

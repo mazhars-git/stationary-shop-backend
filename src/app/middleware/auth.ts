@@ -1,4 +1,4 @@
-import { httpStatus } from 'http-status';
+import  httpStatus  from 'http-status';
 import { NextFunction, Request, Response } from 'express';
 import catchAsync from '../utils/catchAsync';
 import { TUserRole } from '../modules/user/user.interface';

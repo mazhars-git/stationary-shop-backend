@@ -9,7 +9,7 @@ import handleZodError from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next): void => {
-  console.log(err.statusCode);
+  //   console.log(err.statusCode);
   //setting default values
   let statusCode = 500;
   let message = 'Something went wrong!';
@@ -50,7 +50,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next): void => {
   }
 
   //ultimate return
- res.status(statusCode).json({
+  res.status(statusCode).json({
     success: false,
     message,
     errorSources,
@@ -60,4 +60,3 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next): void => {
 };
 
 export default globalErrorHandler;
-
