@@ -8,9 +8,18 @@ import config from '../../config';
 import { createToken } from './auth.utils';
 
 const register = async (payload: IUser) => {
+  // Check if a user with the same email already exists
+  const existingUser = await User.findOne({ email: payload.email });
+
+  if (existingUser) {
+    throw new Error("User already exists with this email");
+  }
+
+  // Create a new user
   const result = await User.create(payload);
   return result;
 };
+
 
 const login = async (payload: ILoginUser) => {
   // checking if the user is exist

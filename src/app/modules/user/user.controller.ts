@@ -1,3 +1,4 @@
+import { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { userService } from './user.service';
@@ -22,6 +23,19 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+// Get me by token controller
+const getMe = catchAsync(async (req, res) => {
+  const { userId } = req.user as JwtPayload;
+  const result = await userService.getMe(userId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'get me successfully',
+    data: result,
+  });
+});
+
 // Get all users controller
 const getAllUser = catchAsync(async (req, res) => {
   const result = await userService.getAllUser();
@@ -34,52 +48,51 @@ const getAllUser = catchAsync(async (req, res) => {
   });
 });
 
-// Get single user controller
-const getSingleUser = catchAsync(async (req, res) => {
-//   console.log(req.params);
-  const userId = req.params.userId;
 
-  const result = await userService.getSingleUser(userId);
+// // Get single user controller
+// const getSingleUser = catchAsync(async (req, res) => {
+// //   console.log(req.params);
+//   const userId = req.params.userId;
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'User retrieved successfully',
-    data: result,
-  });
-});
+//   const result = await userService.getSingleUser(userId);
 
-// Update user controller
-const updateUser = catchAsync(async (req, res) => {
-  const userId = req.params.userId;
-  const body = req.body;
-  const result = await userService.updateUser(userId, body);
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'User retrieved successfully',
+//     data: result,
+//   });
+// });
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'User updated successfully',
-    data: result,
-  });
-});
+// // Update user controller
+// const updateUser = catchAsync(async (req, res) => {
+//   const userId = req.params.userId;
+//   const body = req.body;
+//   const result = await userService.updateUser(userId, body);
 
-// Delete user controller
-const deleteUser = catchAsync(async (req, res) => {
-  const userId = req.params.userId;
-  await userService.deleteUser(userId);
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'User updated successfully',
+//     data: result,
+//   });
+// });
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'User deleted successfully',
-    data: {},
-  });
-});
+// // Delete user controller
+// const deleteUser = catchAsync(async (req, res) => {
+//   const userId = req.params.userId;
+//   await userService.deleteUser(userId);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'User deleted successfully',
+//     data: {},
+//   });
+// });
 
 export const userController = {
   createUser,
-  getAllUser,
-  getSingleUser,
-  updateUser,
-  deleteUser,
+  getMe,
+  getAllUser
 };
