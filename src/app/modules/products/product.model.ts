@@ -12,19 +12,21 @@ const productCategories = [
 // Schema for TProduct
 const productSchema = new Schema<TProduct>(
   {
-    name: { type: String, required: true },
-    brand: {
-      type: String,
-      required: true,
-    },
+    name: { type: String, required: [true, 'Name is required'] },
+    brand: { type: String, required: [true, 'Brand is required'] },
     model: {
       type: String,
       required: true,
     },
-    price: { type: Number, required: true },
-    category: { type: String, enum: productCategories, required: true },
-    description: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    price: { type: Number },
+    image: { type: String, required: [true, 'Image i'] },
+    category: {
+      type: String,
+      enum: productCategories,
+      required: [true, 'Category is required'],
+    },
+    description: { type: String, required: [true, 'Description is required'] },
+    quantity: { type: Number, required: [true, 'Quantity is required'] },
     inStock: { type: Boolean, required: true },
     isDeleted: { type: Boolean, default: false },
   },
