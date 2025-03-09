@@ -57,7 +57,7 @@ export type TProduct = {
   brand: TStationeryBrands;
   model: TProductModel;
   price: number;
-  image?: string;
+  productImg?: string;
   category: string;
   description: string;
   quantity: number;

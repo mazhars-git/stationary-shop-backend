@@ -8,7 +8,6 @@ const productCategories = [
   'Educational',
   'Technology',
 ] as const;
-
 // Schema for TProduct
 const productSchema = new Schema<TProduct>(
   {
@@ -19,7 +18,7 @@ const productSchema = new Schema<TProduct>(
       required: true,
     },
     price: { type: Number },
-    image: { type: String, required: [true, 'Image i'] },
+    productImg: { type: String, required: [true, 'Image is required'] },
     category: {
       type: String,
       enum: productCategories,
