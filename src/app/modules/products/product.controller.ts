@@ -33,7 +33,7 @@ import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 const createNewProduct = async (req: Request, res: Response) => {
   try {
     if(req.file){
-      const imageName = 'hello'
+      const imageName = 'stationary.product'
       const path = req.file.path
       const {secure_url} = await sendImageToCloudinary(imageName, path)
       req.body.productImg = secure_url
