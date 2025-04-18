@@ -1,13 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { TProduct, TProductModel } from './product.interface';
 
-const productCategories = [
-  'Writing',
-  'Office Supplies',
-  'Art Supplies',
-  'Educational',
-  'Technology',
-] as const;
 // Schema for TProduct
 const productSchema = new Schema<TProduct>(
   {
@@ -17,11 +10,29 @@ const productSchema = new Schema<TProduct>(
       type: String,
       required: true,
     },
-    price: { type: Number },
-    productImg: { type: String, required: [true, 'Image is required'] },
+    price: {
+      type: Number,
+      required: [true, 'Product price is required'],
+      validate: {
+        validator: function (value: number) {
+          return value >= 0;
+        },
+        message: 'Price must be a positive number',
+      },
+    },
+    productImg: { type: String, default: '' },
     category: {
       type: String,
-      enum: productCategories,
+      enum: {
+        values: [
+          'Writing',
+          'Office Supplies',
+          'Art Supplies',
+          'Educational',
+          'Technology',
+        ],
+        message: '{VALUE} is not a valid category',
+      },
       required: [true, 'Category is required'],
     },
     description: { type: String, required: [true, 'Description is required'] },

@@ -4,7 +4,11 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
-    role: 'user' | 'admin';
+    phone?: string;
+    address?: string;
+    status: 'active' | 'inactive';
+    role: 'admin' | 'user';
+    isDeleted: boolean;
 }
 
 export type TUserRole = keyof typeof USER_ROLE;

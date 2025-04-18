@@ -1,41 +1,16 @@
 import { Request, Response } from 'express';
 import { ProductServices } from './product.service';
-// import { productValidationSchema } from './product.validation';
 import { Product } from './product.model';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 
-// const createNewProduct = async (req: Request, res: Response) => {
-//   try {
-//     const product = req.body;
-//     const image = req.file
-//     console.log('Received data:', req.body);
-// console.log('Received file:', req.file);
-//     // console.log(product);
-//     // const zodParsedData = productValidationSchema.parse(product);
-
-//     const result = await ProductServices.createNewProductIntoDB(image, product); 
-
-//     res.status(200).json({
-//       success: true,
-//       message: 'Product created successfully',
-//       data: result,
-//     });
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   } catch (err: any) {
-//     res.status(500).json({
-//       success: false,
-//       message: err.message || 'something went wrong',
-//       error: err,
-//     });
-//   }
-// };
 
 const createNewProduct = async (req: Request, res: Response) => {
   try {
     if(req.file){
       const imageName = 'stationary.product'
       const path = req.file.path
-      const {secure_url} = await sendImageToCloudinary(imageName, path)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const {secure_url} : any  = await sendImageToCloudinary(imageName, path)
       req.body.productImg = secure_url
       console.log(secure_url);
     }

@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use("/", ProductRoutes);
 app.use("/", OrderRoutes);
-app.use("/api/user", UserRoutes);
+app.use("/api", UserRoutes);
 app.use("/api/auth", authRouter);
 
 app.get('/', (req: Request, res: Response) => {

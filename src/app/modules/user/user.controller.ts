@@ -1,19 +1,13 @@
-import { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { userService } from './user.service';
+import { UserService } from './user.service';
 import httpStatus from 'http-status';
 
 // Create a new user controller
 const createUser = catchAsync(async (req, res) => {
   const payload = req.body;
 
-  const result = await userService.createUser(payload);
-//   res.status(201).json({
-//     success: true,
-//     message: "User created successfully",
-//     data: result,
-//   });
+  const result = await UserService.createUser(payload);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -24,21 +18,21 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 // Get me by token controller
-const getMe = catchAsync(async (req, res) => {
-  const { userId } = req.user as JwtPayload;
-  const result = await userService.getMe(userId);
+const getSingleUser = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const result = await UserService.getSingleUserFromDB(userId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'get me successfully',
+    message: 'User is retrieved successfully',
     data: result,
   });
 });
 
 // Get all users controller
 const getAllUser = catchAsync(async (req, res) => {
-  const result = await userService.getAllUser();
+  const result = await UserService.getAllUser();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -48,13 +42,12 @@ const getAllUser = catchAsync(async (req, res) => {
   });
 });
 
-
 // // Get single user controller
 // const getSingleUser = catchAsync(async (req, res) => {
 // //   console.log(req.params);
 //   const userId = req.params.userId;
 
-//   const result = await userService.getSingleUser(userId);
+//   const result = await UserService.getSingleUser(userId);
 
 //   sendResponse(res, {
 //     statusCode: httpStatus.OK,
@@ -68,7 +61,7 @@ const getAllUser = catchAsync(async (req, res) => {
 // const updateUser = catchAsync(async (req, res) => {
 //   const userId = req.params.userId;
 //   const body = req.body;
-//   const result = await userService.updateUser(userId, body);
+//   const result = await UserService.updateUser(userId, body);
 
 //   sendResponse(res, {
 //     statusCode: httpStatus.OK,
@@ -81,7 +74,7 @@ const getAllUser = catchAsync(async (req, res) => {
 // // Delete user controller
 // const deleteUser = catchAsync(async (req, res) => {
 //   const userId = req.params.userId;
-//   await userService.deleteUser(userId);
+//   await UserService.deleteUser(userId);
 
 //   sendResponse(res, {
 //     statusCode: httpStatus.OK,
@@ -93,6 +86,6 @@ const getAllUser = catchAsync(async (req, res) => {
 
 export const userController = {
   createUser,
-  getMe,
-  getAllUser
+  getSingleUser,
+  getAllUser,
 };

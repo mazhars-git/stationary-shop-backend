@@ -9,31 +9,34 @@ const orderSchema = new Schema<TOrder>(
       trim: true,
       lowercase: true,
     },
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
-    products: [
-      {
-        product: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-          min: 1,
-        },
-      },
-    ],
+    product: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'Product is Required'],
+      ref: 'Product',
+  },
+  quantity: {
+      type: Number,
+      required: [true, 'Quantity is Required'],
+      min: [1, 'Quantity must be at least 1'],
+  },
     totalPrice: {
       type: Number,
       required: true,
       min: 0,
     },
-    status: {
+    address: {
+      type: String,
+      required: [true, 'Address is Required'],
+  },
+  phone: {
+      type: String,
+      required: [true, 'Phone is Required'],
+  },
+  paymentStatus: {
       type: String,
       enum: ["Pending", "Paid", "Shipped", "Completed", "Cancelled"],
       default: "Pending",
@@ -47,6 +50,11 @@ const orderSchema = new Schema<TOrder>(
       method: { type: String, default: "" },
       date_time: { type: String, default: "" },
     },
+    shippingStatus: {
+      type: String,
+      enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+      default: 'Pending',
+  },
   },
   {
     timestamps: true,

@@ -8,7 +8,7 @@ import { USER_ROLE } from './user.constant';
 const userRouter = Router();
 
 userRouter.post(
-  '/create-admin',
+  '/user/create-user',
   validateRequest(UserValidation.userValidationSchema),
   userController.createUser,
 );
@@ -17,13 +17,13 @@ userRouter.post(
 // userRouter.put('/:userId', userController.updateUser);
 // userRouter.delete('/:userId', userController.deleteUser);
 userRouter.get(
-  '/me',
+  '/user/:userId',
   auth(USER_ROLE.admin, USER_ROLE.user),
-  userController.getMe,
+  userController.getSingleUser,
 );
 
 userRouter.get(
-  '/',
+  '/user',
   auth(USER_ROLE.admin, USER_ROLE.user),
   userController.getAllUser,
 );

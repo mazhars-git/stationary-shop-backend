@@ -3,26 +3,15 @@ import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
 const createNewProductIntoDB = async ( payload: TProduct) => {
-  // if(file){
-  //   const imageName = (payload.name).split( " ").join("_")
-  //   const path = file?.path
-  //   const result = await sendImageToCloudinary(imageName, path)
-  //   payload.productImg= result?.secure_url as string
-
-  // }
   const data = await Product.create(payload)
   return data;
 };
 
-// const createNewProductIntoDB = async (product: TProduct) => {
-//   // imageToCloudinary()
-//   const result = await Product.create(product);
-//   return result;
-// };
 
 // Retrieve All Products
 const getAllProductService = async (searchTerm: Record<string, unknown>) => {
   const allProductQuery = new QueryBuilder(Product.find(), searchTerm)
+    // .search(productSearchableFields)
     .filter()
     .sort()
     .paginate()

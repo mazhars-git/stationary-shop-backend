@@ -16,7 +16,10 @@ const userValidationSchema = z.object({
     password: z
       .string({
         required_error: 'Password is required for your safety',
-      })
+      }),
+      address: z.string().optional(),
+      city: z.string().optional(),
+      phone: z.string().optional(),
   }),
 });
 

@@ -1,43 +1,44 @@
-// import Shurjopay, { PaymentResponse, VerificationResponse } from 'shurjopay';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Shurjopay, { PaymentResponse, VerificationResponse } from "shurjopay";
+import config from "../../config";
 
-// const shurjopay = new Shurjopay();
+const shurjopay = new Shurjopay();
 
-// // Configure Shurjopay with settings from your config
-// shurjopay.config(
-//   config.sp.sp_endpoint!,
-//   config.sp.sp_username!,
-//   config.sp.sp_password!,
-//   config.sp.sp_prefix!,
-//   config.sp.sp_return_url!
-// );
+shurjopay.config(
+  config.sp.sp_endpoint!,
+  config.sp.sp_username!,
+  config.sp.sp_password!,
+  config.sp.sp_prefix!,
+  config.sp.sp_return_url!,
+);
 
-// // Asynchronous function to initiate payment
-// const makePaymentAsync = async (
-//   paymentPayload: Record<string, unknown>
-// ): Promise<PaymentResponse> => {
-//   return new Promise((resolve, reject) => {
-//     shurjopay.makePayment(
-//       paymentPayload,
-//       (response) => resolve(response),
-//       (error) => reject(error)
-//     );
-//   });
-// };
 
-// // Asynchronous function to verify payment status
-// const verifyPaymentAsync = (
-//   orderId: string
-// ): Promise<VerificationResponse[]> => {
-//   return new Promise((resolve, reject) => {
-//     shurjopay.verifyPayment(
-//       orderId,
-//       (response) => resolve(response),
-//       (error) => reject(error)
-//     );
-//   });
-// };
+const makePaymentAsync = async (
+  paymentPayload: any,
+): Promise<PaymentResponse> => {
+  return new Promise((resolve, reject) => {
+    shurjopay.makePayment(
+      paymentPayload,
+      (response) => resolve(response),
+      (error) => reject(error),
+    );
+  });
 
-// export const orderUtils = {
-//   makePaymentAsync,
-//   verifyPaymentAsync,
-// };
+};
+
+const verifyPaymentAsync = (
+  order_id: string,
+): Promise<VerificationResponse[]> => {
+  return new Promise((resolve, reject) => {
+    shurjopay.verifyPayment(
+      order_id,
+      (response) => resolve(response),
+      (error) => reject(error),
+    );
+  });
+};
+
+export const orderUtils = {
+  makePaymentAsync,
+  verifyPaymentAsync,
+};
