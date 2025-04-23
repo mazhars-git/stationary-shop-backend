@@ -12,7 +12,6 @@ const createNewProduct = async (req: Request, res: Response) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const {secure_url} : any  = await sendImageToCloudinary(imageName, path)
       req.body.productImg = secure_url
-      console.log(secure_url);
     }
     // const zodParsedData = productValidationSchema.parse(product);
 

@@ -5,7 +5,7 @@ import { User } from '../user/user.model';
 import { ILoginUser } from './auth.interface';
 import AppError from '../../errors/AppError';
 import config from '../../config';
-import { createToken } from './auth.utils';
+import { createToken, verifyToken } from './auth.utils';
 
 const register = async (payload: IUser) => {
   // Check if a user with the same email already exists
@@ -53,10 +53,46 @@ const login = async (payload: ILoginUser) => {
     config.jwt_access_expires_in as string,
   );
 
-  return { accessToken, user };
+  const refreshToken = createToken(
+    jwtPayload,
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expires_in as string,
+  );
+
+  return { accessToken,
+    refreshToken, };
 };
+
+const refreshToken = async (token: string) => {
+  const decoded = verifyToken(token, config.jwt_refresh_secret as string);
+  const { email } = decoded;
+
+  const user = await User.checkUserExistByEmailId(email);
+
+  if (!user) {
+    throw new AppError(404, 'This user is not found!');
+  }
+
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
+  return {
+    token: accessToken,
+  };
+};
+
+
 
 export const AuthService = {
   register,
   login,
+  refreshToken
 };

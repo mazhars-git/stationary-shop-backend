@@ -125,7 +125,6 @@ const getOrderByCustomer = async (id: string) => {
     path: 'product',
     model: Product,
   });
-  console.log(result);
 
   // If no orders found, return an appropriate message
   if (result.length === 0) {
