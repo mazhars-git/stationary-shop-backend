@@ -4,19 +4,19 @@ import { Product } from './product.model';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 
 
-export const createNewProduct = async (req: Request, res: Response) => {
+const createNewProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, brand, price, category, description, quantity, inStock } = req.body;
     const file = req.file;
+    console.log(file, "file");
 
     if (!file) {
-      return res.status(400).json({ success: false, message: "No image file uploaded." });
+      res.status(400).json({ success: false, message: "No image file uploaded." });
+      return;
     }
 
-    // Upload to cloudinary
-    const result: any = await sendImageToCloudinary(file.filename, file.path);
+    const result = await sendImageToCloudinary(file.filename, file.path) as { secure_url: string };
 
-    // Create product object
     const product = {
       name,
       brand,
@@ -24,21 +24,20 @@ export const createNewProduct = async (req: Request, res: Response) => {
       category,
       description,
       quantity: Number(quantity),
-      inStock: inStock === "true", // string -> boolean
-      image: result?.secure_url, // final image URL
+      inStock: inStock === "true",
+      image: result.secure_url,
     };
 
-    // You can save this to DB
-    console.log("✅ Product to be saved:", product);
+    console.log("Product to be saved:", product);
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       message: "Product created successfully",
-      data: product, // send back to frontend
+      data: product,
     });
   } catch (error) {
     console.error("Error in createProduct:", error);
-    return res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -52,7 +51,6 @@ const getAllProducts = async (req: Request, res: Response):Promise<any> => {
         // Create a case-insensitive regex for the search term
         const regex = new RegExp(searchTerm as string, "i");
   
-        // Search in name, brand, or category fields
         const products = await Product.find({
           $or: [
             { name: regex },
