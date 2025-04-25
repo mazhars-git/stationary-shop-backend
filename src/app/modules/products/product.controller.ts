@@ -4,31 +4,41 @@ import { Product } from './product.model';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 
 
-const createNewProduct = async (req: Request, res: Response) => {
+export const createNewProduct = async (req: Request, res: Response) => {
   try {
-    if(req.file){
-      const imageName = 'stationary.product'
-      const path = req.file.path
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const {secure_url} : any  = await sendImageToCloudinary(imageName, path)
-      req.body.productImg = secure_url
+    const { name, brand, price, category, description, quantity, inStock } = req.body;
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ success: false, message: "No image file uploaded." });
     }
-    // const zodParsedData = productValidationSchema.parse(product);
 
-    const result = await ProductServices.createNewProductIntoDB(req.body); 
+    // Upload to cloudinary
+    const result: any = await sendImageToCloudinary(file.filename, file.path);
 
-    res.status(200).json({
+    // Create product object
+    const product = {
+      name,
+      brand,
+      price: Number(price),
+      category,
+      description,
+      quantity: Number(quantity),
+      inStock: inStock === "true", // string -> boolean
+      image: result?.secure_url, // final image URL
+    };
+
+    // You can save this to DB
+    console.log("✅ Product to be saved:", product);
+
+    return res.status(201).json({
       success: true,
-      message: 'Product created successfully',
-      data: result,
+      message: "Product created successfully",
+      data: product, // send back to frontend
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err.message || 'something went wrong',
-      error: err,
-    });
+  } catch (error) {
+    console.error("Error in createProduct:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 

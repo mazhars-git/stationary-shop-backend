@@ -8,7 +8,7 @@ const productSchema = new Schema<TProduct>(
     brand: { type: String, required: [true, 'Brand is required'] },
     model: {
       type: String,
-      required: true,
+      optional: true,
     },
     price: {
       type: Number,
@@ -20,7 +20,7 @@ const productSchema = new Schema<TProduct>(
         message: 'Price must be a positive number',
       },
     },
-    productImg: { type: String, default: '' },
+    image: { type: String, default: '' },
     category: {
       type: String,
       enum: {

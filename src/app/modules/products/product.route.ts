@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Create a new product
 router.post(
-  '/api/products',
+  '/api/product/create-product',
   upload.single('file'),
   textToJson(),
   ProductController.createNewProduct,

@@ -13,9 +13,6 @@ userRouter.post(
   userController.createUser,
 );
 
-// userRouter.get('/:userId', userController.getSingleUser);
-// userRouter.put('/:userId', userController.updateUser);
-// userRouter.delete('/:userId', userController.deleteUser);
 userRouter.get(
   '/user/:userId',
   auth(USER_ROLE.admin, USER_ROLE.user),
@@ -26,6 +23,12 @@ userRouter.get(
   '/user',
   auth(USER_ROLE.admin, USER_ROLE.user),
   userController.getAllUser,
+);
+
+userRouter.get(
+  '/user/me',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  userController.getCurrentUser 
 );
 
 export const UserRoutes = userRouter;

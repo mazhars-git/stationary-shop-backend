@@ -11,9 +11,9 @@ export type TProductCategory =
 export type TProduct = {
   name: string;
   brand: string;
-  model: string;
+  model?: string;
   price: number;
-  productImg: string;
+  image: string;
   category:
     | 'Writing'
     | 'Office Supplies'
