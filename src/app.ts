@@ -13,7 +13,7 @@ const app: Application = express();
 // CORS configuration
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://papaya-platypus-13723d.netlify.app", // Replace with deployed client URL
     credentials: true,
   })
 );
