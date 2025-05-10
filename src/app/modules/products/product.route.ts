@@ -19,7 +19,10 @@ router.get('/api/products', ProductController.getAllProducts);
 router.get('/api/product/:productId', ProductController.getSingleProduct);
 
 // Update Product Information
-router.put('/api/product/update/:productId', ProductController.updateSingleProduct);
+router.put(
+  '/api/product/update/:productId',
+  ProductController.updateSingleProduct,
+);
 
 // Delete a Product from DB
 router.delete('/api/product/:productId', ProductController.deleteProduct);
