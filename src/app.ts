@@ -12,9 +12,13 @@ import globalErrorHandler from './app/middleware/globalErrorHandler';
 const app: Application = express();
 
 // CORS configuration//
+
 app.use(
   cors({
-    origin: 'https://stationary-frontend-three.vercel.app', // Replace with deployed client URL
+    origin: [
+      'https://stationary-frontend-three.vercel.app',
+      'http://localhost:3000/',
+    ],
     credentials: true,
   }),
 );
